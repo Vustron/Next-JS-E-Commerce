@@ -1,6 +1,7 @@
 'use client';
 
 import * as z from 'zod';
+import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { useModal } from '@/hooks/useModal';
 import { Modal } from '@/components/ui/modal';
@@ -16,10 +17,14 @@ import {
 	FormMessage,
 } from '@/components/ui/form';
 
-import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { useState } from 'react';
 
 const StoreModal = () => {
+	// init state
+	const [isLoading, setIsLoading] = useState(false);
+
 	// init modal
 	const storeModal = useModal();
 
@@ -32,7 +37,17 @@ const StoreModal = () => {
 
 	// submit handler
 	const onSubmit = async (values: z.infer<typeof SetUpFormSchema>) => {
-		console.log(values);
+		try {
+			setIsLoading(true);
+
+			const response = await axios.post('/api/stores', values);
+
+			console.log(response.data);
+		} catch (error) {
+			console.log(error);
+		} finally {
+			setIsLoading(false);
+		}
 	};
 
 	return (
@@ -54,7 +69,11 @@ const StoreModal = () => {
 										<FormLabel>Name</FormLabel>
 
 										<FormControl>
-											<Input placeholder='E-Commerce' {...field} />
+											<Input
+												disabled={isLoading}
+												placeholder='E-Commerce'
+												{...field}
+											/>
 										</FormControl>
 
 										<FormMessage />
@@ -66,8 +85,14 @@ const StoreModal = () => {
 								className='pt-6 space-x-2 flex items-center justify-end
 							w-full'
 							>
-								<Button type='submit'>Continue</Button>
-								<Button variant='outline' onClick={storeModal.onClose}>
+								<Button disabled={isLoading} type='submit'>
+									Continue
+								</Button>
+								<Button
+									disabled={isLoading}
+									variant='outline'
+									onClick={storeModal.onClose}
+								>
 									Cancel
 								</Button>
 							</div>
