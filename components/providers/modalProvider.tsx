@@ -1,7 +1,7 @@
 'use client';
 
-import { useState, useEffect } from 'react';
 import useMounted from '@/hooks/useMounted';
+import StoreModal from '@/components/modals/storeModal';
 
 export const ModalProvider = () => {
 	// fix hydration error
@@ -10,4 +10,10 @@ export const ModalProvider = () => {
 	if (!isMounted) {
 		return null;
 	}
+
+	return (
+		<>
+			<StoreModal />
+		</>
+	);
 };
