@@ -19,9 +19,14 @@ import {
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { useRouter } from 'next/navigation';
+import toast from 'react-hot-toast';
 import { useState } from 'react';
 
 const StoreModal = () => {
+	// init router
+	const router = useRouter();
+
 	// init state
 	const [isLoading, setIsLoading] = useState(false);
 
@@ -42,9 +47,12 @@ const StoreModal = () => {
 
 			const response = await axios.post('/api/stores', values);
 
-			console.log(response.data);
-		} catch (error) {
+			toast.success('Store created');
+			form.reset();
+			router.refresh();
+		} catch (error: any) {
 			console.log(error);
+			toast.error('Something went wrong: ', error);
 		} finally {
 			setIsLoading(false);
 		}
