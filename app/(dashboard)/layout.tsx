@@ -1,6 +1,7 @@
 import { auth } from '@clerk/nextjs';
 import { redirect } from 'next/navigation';
 import db from '@/lib/actions/initializeDb';
+import Navbar from '@/components/shared/Navbar';
 
 const DashboardLayout = async ({
 	children,
@@ -33,7 +34,7 @@ const DashboardLayout = async ({
 	return (
 		<>
 			<div>
-				{/* Navbar TODO */}
+				<Navbar />
 				{children}
 			</div>
 		</>

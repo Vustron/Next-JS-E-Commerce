@@ -5,7 +5,7 @@ import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { useModal } from '@/hooks/useModal';
 import { Modal } from '@/components/ui/modal';
-import { SetUpFormSchema } from '@/lib/validation';
+import { SetUpFormSchema } from '@/lib/constants/validation';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import {
@@ -50,6 +50,7 @@ const StoreModal = () => {
 			toast.success('Store created');
 			form.reset();
 			router.refresh();
+			window.location.assign(`/${response.data.id}`);
 		} catch (error: any) {
 			console.log(error);
 			toast.error('Something went wrong: ', error);
