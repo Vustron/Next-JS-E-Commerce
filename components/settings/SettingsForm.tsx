@@ -1,6 +1,8 @@
 'use client';
 
+import axios from 'axios';
 import { useState } from 'react';
+import toast from 'react-hot-toast';
 import { Trash } from 'lucide-react';
 import { Store } from '@prisma/client';
 import { useForm } from 'react-hook-form';
@@ -9,6 +11,7 @@ import { Button } from '@/components/ui/button';
 import Heading from '@/components/shared/Heading';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Separator } from '@/components/ui/separator';
+import { useParams, useRouter } from 'next/navigation';
 import { SettingsFormValues } from '@/lib/constants/types';
 import { SettingsFormSchema } from '@/lib/constants/validation';
 
@@ -26,6 +29,12 @@ interface SettingsFormProps {
 }
 
 const SettingsForm: React.FC<SettingsFormProps> = ({ initialData }) => {
+	// init router
+	const router = useRouter();
+
+	// init params
+	const params = useParams();
+
 	// init states
 	const [isOpen, setIsOpen] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
@@ -38,7 +47,19 @@ const SettingsForm: React.FC<SettingsFormProps> = ({ initialData }) => {
 
 	// submit handler
 	const onSubmit = async (values: SettingsFormValues) => {
-		console.log(values);
+		try {
+			setIsLoading(true);
+
+			await axios.patch(`/api/stores/${params.storeId}`, values);
+
+			toast.success('Store updated');
+			router.refresh();
+		} catch (error: any) {
+			console.log(error);
+			toast.error('Something went wrong: ', error);
+		} finally {
+			setIsLoading(false);
+		}
 	};
 
 	return (
@@ -46,7 +67,12 @@ const SettingsForm: React.FC<SettingsFormProps> = ({ initialData }) => {
 			<div className='flex items-center justify-between'>
 				<Heading title='Settings' description='Manage store preferences' />
 
-				<Button variant='destructive' size='sm' onClick={() => null}>
+				<Button
+					disabled={isLoading}
+					variant='destructive'
+					size='sm'
+					onClick={() => setIsOpen(true)}
+				>
 					<Trash className='h-4 w-4' />
 				</Button>
 			</div>

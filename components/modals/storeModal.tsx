@@ -2,11 +2,12 @@
 
 import * as z from 'zod';
 import axios from 'axios';
+
 import { useForm } from 'react-hook-form';
 import { useModal } from '@/hooks/useModal';
 import { Modal } from '@/components/ui/modal';
-import { SetUpFormSchema } from '@/lib/constants/validation';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { SetUpFormSchema } from '@/lib/constants/validation';
 
 import {
 	Form,
@@ -22,6 +23,7 @@ import { Input } from '@/components/ui/input';
 import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
 import { useState } from 'react';
+import { SetUpFormValues } from '@/lib/constants/types';
 
 const StoreModal = () => {
 	// init router
@@ -33,7 +35,7 @@ const StoreModal = () => {
 	// init modal
 	const storeModal = useModal();
 
-	const form = useForm<z.infer<typeof SetUpFormSchema>>({
+	const form = useForm<SetUpFormValues>({
 		resolver: zodResolver(SetUpFormSchema),
 		defaultValues: {
 			name: '',
@@ -41,7 +43,7 @@ const StoreModal = () => {
 	});
 
 	// submit handler
-	const onSubmit = async (values: z.infer<typeof SetUpFormSchema>) => {
+	const onSubmit = async (values: SetUpFormValues) => {
 		try {
 			setIsLoading(true);
 
