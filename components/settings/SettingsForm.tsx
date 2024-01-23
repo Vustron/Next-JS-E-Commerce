@@ -7,6 +7,7 @@ import { Trash } from 'lucide-react';
 import { Store } from '@prisma/client';
 import { useForm } from 'react-hook-form';
 import { Input } from '@/components/ui/input';
+import ApiAlert from '@/components/ui/apiAlert';
 import { Button } from '@/components/ui/button';
 import Heading from '@/components/shared/Heading';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -138,6 +139,13 @@ const SettingsForm: React.FC<SettingsFormProps> = ({ initialData }) => {
 					</Button>
 				</form>
 			</Form>
+
+			<Separator />
+			<ApiAlert
+				title='NEXT_PUBLIC_API_URL'
+				description={`${origin}/api/${params.storeId}`}
+				variant='public'
+			/>
 		</>
 	);
 };
