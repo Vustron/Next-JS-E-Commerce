@@ -12,6 +12,7 @@ import Heading from '@/components/shared/Heading';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Separator } from '@/components/ui/separator';
 import { useParams, useRouter } from 'next/navigation';
+import AlertModal from '@/components/modals/alertModal';
 import { SettingsFormValues } from '@/lib/constants/types';
 import { SettingsFormSchema } from '@/lib/constants/validation';
 
@@ -45,7 +46,7 @@ const SettingsForm: React.FC<SettingsFormProps> = ({ initialData }) => {
 		defaultValues: initialData,
 	});
 
-	// submit handler
+	// update handler
 	const onSubmit = async (values: SettingsFormValues) => {
 		try {
 			setIsLoading(true);
@@ -62,8 +63,36 @@ const SettingsForm: React.FC<SettingsFormProps> = ({ initialData }) => {
 		}
 	};
 
+	// delete handler
+	const onDelete = async () => {
+		try {
+			setIsLoading(true);
+
+			await axios.delete(`/api/stores/${params.storeId}`);
+
+			toast.success('Store deleted');
+			router.push('/');
+			router.refresh();
+		} catch (error: any) {
+			console.log(error);
+			toast.error(
+				'Make sure you removed all products and categories first ',
+				error
+			);
+		} finally {
+			setIsLoading(false);
+			setIsOpen(false);
+		}
+	};
+
 	return (
 		<>
+			<AlertModal
+				isOpen={isOpen}
+				onClose={() => setIsOpen(false)}
+				onConfirm={onDelete}
+				isLoading={isLoading}
+			/>
 			<div className='flex items-center justify-between'>
 				<Heading title='Settings' description='Manage store preferences' />
 
