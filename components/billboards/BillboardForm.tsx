@@ -4,9 +4,8 @@ import axios from 'axios';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { Trash } from 'lucide-react';
-import { Billboard } from '@prisma/client';
 import { useForm } from 'react-hook-form';
-import useOrigin from '@/hooks/useOrigin';
+import { Billboard } from '@prisma/client';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import Heading from '@/components/shared/Heading';
@@ -37,9 +36,6 @@ const BillboardForm: React.FC<BillboardForm> = ({ initialData }) => {
 	const description = initialData ? 'Edit a billboard' : 'Add a new Billboard';
 	const toastMessage = initialData ? 'Billboard updated' : 'Billboard created';
 	const action = initialData ? 'Save Changes' : 'Create';
-
-	// init origin
-	const origin = useOrigin();
 
 	// init router
 	const router = useRouter();

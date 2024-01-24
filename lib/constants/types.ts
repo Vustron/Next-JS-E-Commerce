@@ -17,3 +17,9 @@ export type SettingsFormValues = z.infer<typeof SettingsFormSchema>;
 export type SetUpFormValues = z.infer<typeof SetUpFormSchema>;
 
 export type BillboardFormValues = z.infer<typeof BillboardFormSchema>;
+
+export type BillboardColumn = {
+	id: string;
+	label: string;
+	createdAt: string;
+};
