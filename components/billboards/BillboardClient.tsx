@@ -1,6 +1,7 @@
 'use client';
 
 import { Plus } from 'lucide-react';
+import ApiList from '@/components/ui/api_list';
 import { Button } from '@/components/ui/button';
 import Heading from '@/components/shared/Heading';
 import { Separator } from '@/components/ui/separator';
@@ -38,6 +39,12 @@ const BillboardClient: React.FC<BillboardClientProps> = ({ data }) => {
 			<Separator />
 
 			<DataTable searchKey='label' columns={Columns} data={data} />
+
+			<Heading title='API' description='API calls for Billboards' />
+
+			<Separator />
+
+			<ApiList entityName='billboards' entityIdName='billboardId' />
 		</>
 	);
 };
