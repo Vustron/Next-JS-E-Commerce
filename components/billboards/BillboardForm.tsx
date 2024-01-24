@@ -70,9 +70,9 @@ const BillboardForm: React.FC<BillboardForm> = ({ initialData }) => {
 				await axios.post(`/api/${params.storeId}/billboards`, values);
 			}
 
-			router.refresh();
-			router.push(`/${params.storeId}/billboards`);
 			toast.success(toastMessage);
+			router.push(`/${params.storeId}/billboards`);
+			router.refresh();
 		} catch (error: any) {
 			console.log(error);
 			toast.error('Something went wrong: ', error);
