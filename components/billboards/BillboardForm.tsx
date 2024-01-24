@@ -25,6 +25,7 @@ import {
 	FormLabel,
 	FormMessage,
 } from '@/components/ui/form';
+import ImageUpload from '@/components/ui/image_upload';
 
 interface BillboardForm {
 	initialData: Billboard | null;
@@ -64,10 +65,18 @@ const BillboardForm: React.FC<BillboardForm> = ({ initialData }) => {
 		try {
 			setIsLoading(true);
 
-			await axios.patch(`/api/stores/${params.storeId}`, values);
+			if (initialData) {
+				await axios.patch(
+					`/api/${params.storeId}/billboards/${params.billboardId}`,
+					values
+				);
+			} else {
+				await axios.post(`/api/${params.storeId}/billboards`, values);
+			}
 
-			toast.success('Store updated');
 			router.refresh();
+			router.push(`/${params.storeId}/billboards`);
+			toast.success(toastMessage);
 		} catch (error: any) {
 			console.log(error);
 			toast.error('Something went wrong: ', error);
@@ -81,15 +90,17 @@ const BillboardForm: React.FC<BillboardForm> = ({ initialData }) => {
 		try {
 			setIsLoading(true);
 
-			await axios.delete(`/api/stores/${params.storeId}`);
+			await axios.delete(
+				`/api/${params.storeId}/billboards/${params.billboardId}`
+			);
 
-			toast.success('Store deleted');
+			toast.success('Billboard deleted');
 			router.push('/');
 			router.refresh();
 		} catch (error: any) {
 			console.log(error);
 			toast.error(
-				'Make sure you removed all products and categories first ',
+				'Make sure you removed all categories using this billboard first',
 				error
 			);
 		} finally {
@@ -128,6 +139,24 @@ const BillboardForm: React.FC<BillboardForm> = ({ initialData }) => {
 					onSubmit={form.handleSubmit(onSubmit)}
 					className='space-y-8 w-full'
 				>
+					<FormField
+						control={form.control}
+						name='imageUrl'
+						render={({ field }) => (
+							<FormItem>
+								<FormLabel>Background Image</FormLabel>
+								<FormControl>
+									<ImageUpload
+										value={field.value ? [field.value] : []}
+										disabled={isLoading}
+										onChange={(url) => field.onChange(url)}
+										onRemove={() => field.onChange('')}
+									/>
+								</FormControl>
+								<FormMessage />
+							</FormItem>
+						)}
+					/>
 					<div className='grid grid-cols-3 gap-8'>
 						<FormField
 							control={form.control}

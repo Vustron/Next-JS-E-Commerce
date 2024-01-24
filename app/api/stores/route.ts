@@ -15,7 +15,7 @@ export async function POST(req: Request) {
 
 		// if there's no profile throw an error
 		if (!userId) {
-			return new NextResponse('Unauthorized', { status: 401 });
+			return new NextResponse('Unauthenticated', { status: 401 });
 		}
 
 		// if there's no name throw an error
