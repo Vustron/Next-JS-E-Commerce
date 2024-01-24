@@ -27,7 +27,7 @@ export async function GET(
 
 export async function DELETE(
 	req: Request,
-	{ params }: { params: { storeId: string; billboardId: string } }
+	{ params }: { params: { billboardId: string; storeId: string } }
 ) {
 	try {
 		// fetch auth
@@ -71,7 +71,7 @@ export async function DELETE(
 
 export async function PATCH(
 	req: Request,
-	{ params }: { params: { storeId: string; billboardId: string } }
+	{ params }: { params: { billboardId: string; storeId: string } }
 ) {
 	try {
 		// fetch auth
