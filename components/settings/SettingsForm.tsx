@@ -6,6 +6,7 @@ import toast from 'react-hot-toast';
 import { Trash } from 'lucide-react';
 import { Store } from '@prisma/client';
 import { useForm } from 'react-hook-form';
+import useOrigin from '@/hooks/useOrigin';
 import { Input } from '@/components/ui/input';
 import ApiAlert from '@/components/ui/apiAlert';
 import { Button } from '@/components/ui/button';
@@ -31,6 +32,9 @@ interface SettingsFormProps {
 }
 
 const SettingsForm: React.FC<SettingsFormProps> = ({ initialData }) => {
+	// init origin
+	const origin = useOrigin();
+
 	// init router
 	const router = useRouter();
 
