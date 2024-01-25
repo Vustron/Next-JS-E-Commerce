@@ -2,6 +2,7 @@ import * as z from 'zod';
 
 import {
 	BillboardFormSchema,
+	CategoryFormSchema,
 	SetUpFormSchema,
 	SettingsFormSchema,
 } from '@/lib/constants/validation';
@@ -18,8 +19,17 @@ export type SetUpFormValues = z.infer<typeof SetUpFormSchema>;
 
 export type BillboardFormValues = z.infer<typeof BillboardFormSchema>;
 
+export type CategoryFormValues = z.infer<typeof CategoryFormSchema>;
+
 export type BillboardColumn = {
 	id: string;
 	label: string;
+	createdAt: string;
+};
+
+export type CategoryColumn = {
+	id: string;
+	name: string;
+	billboardLabel: string;
 	createdAt: string;
 };
