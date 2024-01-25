@@ -5,6 +5,7 @@ import {
 	CategoryFormSchema,
 	SetUpFormSchema,
 	SettingsFormSchema,
+	SizesFormSchema,
 } from '@/lib/constants/validation';
 
 import { PopoverTrigger } from '@/components/ui/popover';
@@ -21,6 +22,8 @@ export type BillboardFormValues = z.infer<typeof BillboardFormSchema>;
 
 export type CategoryFormValues = z.infer<typeof CategoryFormSchema>;
 
+export type SizesFormValues = z.infer<typeof SizesFormSchema>;
+
 export type BillboardColumn = {
 	id: string;
 	label: string;
@@ -31,5 +34,12 @@ export type CategoryColumn = {
 	id: string;
 	name: string;
 	billboardLabel: string;
+	createdAt: string;
+};
+
+export type SizesColumn = {
+	id: string;
+	name: string;
+	value: string;
 	createdAt: string;
 };

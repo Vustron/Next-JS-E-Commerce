@@ -29,3 +29,12 @@ export const CategoryFormSchema = z.object({
 		message: 'Billboard ID is required',
 	}),
 });
+
+export const SizesFormSchema = z.object({
+	name: z.string().min(1, {
+		message: 'Name is required',
+	}),
+	value: z.string().min(1, {
+		message: 'Value is required',
+	}),
+});
