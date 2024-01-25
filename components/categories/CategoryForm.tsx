@@ -5,7 +5,7 @@ import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { Trash } from 'lucide-react';
 import { useForm } from 'react-hook-form';
-import { Category } from '@prisma/client';
+import { Billboard, Category } from '@prisma/client';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import Heading from '@/components/shared/Heading';
@@ -25,11 +25,20 @@ import {
 	FormMessage,
 } from '@/components/ui/form';
 
+import {
+	Select,
+	SelectContent,
+	SelectItem,
+	SelectTrigger,
+	SelectValue,
+} from '@/components/ui/select';
+
 interface CategoryForm {
+	billboards: Billboard[];
 	initialData: Category | null;
 }
 
-const CategoryForm: React.FC<CategoryForm> = ({ initialData }) => {
+const CategoryForm: React.FC<CategoryForm> = ({ billboards, initialData }) => {
 	// init dynamic descriptions
 	const title = initialData ? 'Edit category' : 'Create Category';
 	const description = initialData ? 'Edit a category' : 'Add a new Category';
@@ -62,15 +71,15 @@ const CategoryForm: React.FC<CategoryForm> = ({ initialData }) => {
 
 			if (initialData) {
 				await axios.patch(
-					`/api/${params.storeId}/billboards/${params.billboardId}`,
+					`/api/${params.storeId}/categories/${params.categoryId}`,
 					values
 				);
 			} else {
-				await axios.post(`/api/${params.storeId}/billboards`, values);
+				await axios.post(`/api/${params.storeId}/categories`, values);
 			}
 
 			toast.success(toastMessage);
-			router.push(`/${params.storeId}/billboards`);
+			router.push(`/${params.storeId}/categories`);
 			router.refresh();
 		} catch (error: any) {
 			console.log(error);
@@ -86,16 +95,16 @@ const CategoryForm: React.FC<CategoryForm> = ({ initialData }) => {
 			setIsLoading(true);
 
 			await axios.delete(
-				`/api/${params.storeId}/billboards/${params.billboardId}`
+				`/api/${params.storeId}/categories/${params.categoryId}`
 			);
 
-			toast.success('Billboard deleted');
-			router.push(`/${params.storeId}/billboards`);
+			toast.success('Category deleted');
+			router.push(`/${params.storeId}/categories`);
 			router.refresh();
 		} catch (error: any) {
 			console.log(error);
 			toast.error(
-				'Make sure you removed all categories using this billboard first',
+				'Make sure you removed all products using this category first',
 				error
 			);
 		} finally {
@@ -148,6 +157,40 @@ const CategoryForm: React.FC<CategoryForm> = ({ initialData }) => {
 											{...field}
 										/>
 									</FormControl>
+									<FormMessage />
+								</FormItem>
+							)}
+						/>
+
+						<FormField
+							control={form.control}
+							name='billboardId'
+							render={({ field }) => (
+								<FormItem>
+									<FormLabel>Billboard</FormLabel>
+									<Select
+										disabled={isLoading}
+										onValueChange={field.onChange}
+										value={field.value}
+										defaultValue={field.value}
+									>
+										<FormControl>
+											<SelectTrigger>
+												<SelectValue
+													defaultValue={field.value}
+													placeholder='Select a billboard'
+												/>
+											</SelectTrigger>
+										</FormControl>
+
+										<SelectContent>
+											{billboards.map((billboard) => (
+												<SelectItem key={billboard.id} value={billboard.id}>
+													{billboard.label}
+												</SelectItem>
+											))}
+										</SelectContent>
+									</Select>
 									<FormMessage />
 								</FormItem>
 							)}
