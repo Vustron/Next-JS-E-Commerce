@@ -14,21 +14,21 @@ export async function POST(
 		const body = await req.json();
 
 		// extract name
-		const { label, imageUrl } = body;
+		const { name, billboardId } = body;
 
 		// if there's no profile throw an error
 		if (!userId) {
 			return new NextResponse('Unauthenticated', { status: 401 });
 		}
 
-		// if there's no label throw an error
-		if (!label) {
-			return new NextResponse('Label is required', { status: 400 });
+		// if there's no name throw an error
+		if (!name) {
+			return new NextResponse('Name is required', { status: 400 });
 		}
 
-		// if there's no imageUrl throw an error
-		if (!imageUrl) {
-			return new NextResponse('imageUrl is required', { status: 400 });
+		// if there's no billboardId throw an error
+		if (!billboardId) {
+			return new NextResponse('Billboard ID is required', { status: 400 });
 		}
 
 		// if there's no storeId throw an error
@@ -49,17 +49,17 @@ export async function POST(
 			return new NextResponse('Unauthorized', { status: 403 });
 		}
 
-		const billboard = await db.billboard.create({
+		const category = await db.category.create({
 			data: {
-				label,
-				imageUrl,
+				name,
+				billboardId,
 				storeId: params.storeId,
 			},
 		});
 
-		return NextResponse.json(billboard);
+		return NextResponse.json(category);
 	} catch (error) {
-		console.log('[BILLBOARDS_POST]', error);
+		console.log('[CATEGORIES_POST]', error);
 		return new NextResponse('Internal Error', { status: 500 });
 	}
 }
@@ -74,15 +74,15 @@ export async function GET(
 			return new NextResponse('Store ID is required', { status: 400 });
 		}
 
-		const fetchBillboards = await db.billboard.findMany({
+		const fetchCategories = await db.category.findMany({
 			where: {
 				storeId: params.storeId,
 			},
 		});
 
-		return NextResponse.json(fetchBillboards);
+		return NextResponse.json(fetchCategories);
 	} catch (error) {
-		console.log('[BILLBOARDS_GET]', error);
+		console.log('[CATEGORIES_GET]', error);
 		return new NextResponse('Internal Error', { status: 500 });
 	}
 }
