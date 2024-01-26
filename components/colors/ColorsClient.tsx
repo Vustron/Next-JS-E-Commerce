@@ -5,7 +5,7 @@ import ApiList from '@/components/ui/api_list';
 import { Button } from '@/components/ui/button';
 import Heading from '@/components/shared/Heading';
 import { ColorsColumn } from '@/lib/constants/types';
-import { Columns } from '@/components/sizes/Columns';
+import { Columns } from '@/components/colors/Columns';
 import { Separator } from '@/components/ui/separator';
 import { useParams, useRouter } from 'next/navigation';
 import { DataTable } from '@/components/ui/data_table';

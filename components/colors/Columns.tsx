@@ -2,7 +2,7 @@
 
 import { ColumnDef } from '@tanstack/react-table';
 import { ColorsColumn } from '@/lib/constants/types';
-import CellActions from '@/components/sizes/CellActions';
+import CellActions from '@/components/colors/CellActions';
 
 export const Columns: ColumnDef<ColorsColumn>[] = [
 	{
