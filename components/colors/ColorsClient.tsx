@@ -4,14 +4,14 @@ import { Plus } from 'lucide-react';
 import ApiList from '@/components/ui/api_list';
 import { Button } from '@/components/ui/button';
 import Heading from '@/components/shared/Heading';
-import { SizesColumn } from '@/lib/constants/types';
+import { ColorsColumn } from '@/lib/constants/types';
 import { Columns } from '@/components/sizes/Columns';
 import { Separator } from '@/components/ui/separator';
 import { useParams, useRouter } from 'next/navigation';
 import { DataTable } from '@/components/ui/data_table';
 
 interface ColorsClientProps {
-	data: SizesColumn[];
+	data: ColorsColumn[];
 }
 
 const ColorsClient: React.FC<ColorsClientProps> = ({ data }) => {

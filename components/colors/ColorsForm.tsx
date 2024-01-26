@@ -5,7 +5,7 @@ import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { Trash } from 'lucide-react';
 import { useForm } from 'react-hook-form';
-import { Size } from '@prisma/client';
+import { Color } from '@prisma/client';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import Heading from '@/components/shared/Heading';
@@ -26,7 +26,7 @@ import {
 } from '@/components/ui/form';
 
 interface ColorsFormProps {
-	initialData: Size | null;
+	initialData: Color | null;
 }
 
 const ColorsForm: React.FC<ColorsFormProps> = ({ initialData }) => {
@@ -62,7 +62,7 @@ const ColorsForm: React.FC<ColorsFormProps> = ({ initialData }) => {
 
 			if (initialData) {
 				await axios.patch(
-					`/api/${params.storeId}/colors/${params.sizeId}`,
+					`/api/${params.storeId}/colors/${params.colorId}`,
 					values
 				);
 			} else {
@@ -142,7 +142,7 @@ const ColorsForm: React.FC<ColorsFormProps> = ({ initialData }) => {
 									<FormControl>
 										<Input
 											disabled={isLoading}
-											placeholder='Size name...'
+											placeholder='Color name...'
 											{...field}
 										/>
 									</FormControl>
@@ -158,11 +158,17 @@ const ColorsForm: React.FC<ColorsFormProps> = ({ initialData }) => {
 								<FormItem>
 									<FormLabel>Value</FormLabel>
 									<FormControl>
-										<Input
-											disabled={isLoading}
-											placeholder='Color value...'
-											{...field}
-										/>
+										<div className='flex items-center gap-x-4'>
+											<Input
+												disabled={isLoading}
+												placeholder='Color value...'
+												{...field}
+											/>
+											<div
+												className='border p-4 rounded-full'
+												style={{ backgroundColor: field.value }}
+											/>
+										</div>
 									</FormControl>
 									<FormMessage />
 								</FormItem>

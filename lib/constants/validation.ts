@@ -43,7 +43,12 @@ export const ColorsFormSchema = z.object({
 	name: z.string().min(1, {
 		message: 'Name is required',
 	}),
-	value: z.string().min(1, {
-		message: 'Value is required',
-	}),
+	value: z
+		.string()
+		.min(4, {
+			message: 'Value is required',
+		})
+		.regex(/^#/, {
+			message: 'String must be a valid hex code',
+		}),
 });
