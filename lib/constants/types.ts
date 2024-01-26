@@ -3,6 +3,7 @@ import * as z from 'zod';
 import {
 	BillboardFormSchema,
 	CategoryFormSchema,
+	ColorsFormSchema,
 	SetUpFormSchema,
 	SettingsFormSchema,
 	SizesFormSchema,
@@ -24,6 +25,8 @@ export type CategoryFormValues = z.infer<typeof CategoryFormSchema>;
 
 export type SizesFormValues = z.infer<typeof SizesFormSchema>;
 
+export type ColorsFormValues = z.infer<typeof ColorsFormSchema>;
+
 export type BillboardColumn = {
 	id: string;
 	label: string;
@@ -38,6 +41,13 @@ export type CategoryColumn = {
 };
 
 export type SizesColumn = {
+	id: string;
+	name: string;
+	value: string;
+	createdAt: string;
+};
+
+export type ColorsColumn = {
 	id: string;
 	name: string;
 	value: string;

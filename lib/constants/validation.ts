@@ -38,3 +38,12 @@ export const SizesFormSchema = z.object({
 		message: 'Value is required',
 	}),
 });
+
+export const ColorsFormSchema = z.object({
+	name: z.string().min(1, {
+		message: 'Name is required',
+	}),
+	value: z.string().min(1, {
+		message: 'Value is required',
+	}),
+});
