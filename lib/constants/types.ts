@@ -4,6 +4,7 @@ import {
 	BillboardFormSchema,
 	CategoryFormSchema,
 	ColorsFormSchema,
+	ProductsFormSchema,
 	SetUpFormSchema,
 	SettingsFormSchema,
 	SizesFormSchema,
@@ -26,6 +27,8 @@ export type CategoryFormValues = z.infer<typeof CategoryFormSchema>;
 export type SizesFormValues = z.infer<typeof SizesFormSchema>;
 
 export type ColorsFormValues = z.infer<typeof ColorsFormSchema>;
+
+export type ProductsFormValues = z.infer<typeof ProductsFormSchema>;
 
 export type BillboardColumn = {
 	id: string;
@@ -51,5 +54,17 @@ export type ColorsColumn = {
 	id: string;
 	name: string;
 	value: string;
+	createdAt: string;
+};
+
+export type ProductColumn = {
+	id: string;
+	name: string;
+	price: string;
+	size: string;
+	category: string;
+	color: string;
+	isFeatured: boolean;
+	isArchived: boolean;
 	createdAt: string;
 };
