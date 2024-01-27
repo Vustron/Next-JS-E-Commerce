@@ -1,3 +1,3 @@
 
 //GET
-http://localhost:3000/api/2748dffb-7885-4539-b22d-939e14366d98/sizes/1189ee49-f5ea-4b63-86ee-57e5df9f680e
+http://localhost:3000/api/2748dffb-7885-4539-b22d-939e14366d98/products
