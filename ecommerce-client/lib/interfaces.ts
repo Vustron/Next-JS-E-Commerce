@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { MouseEventHandler } from 'react';
 
 export interface ContainerProps {
 	children: React.ReactNode;
@@ -21,4 +21,58 @@ export interface ButtonProps
 
 export interface BillboardProps {
 	data: Billboard;
+}
+
+export interface Product {
+	id: string;
+	category: Category;
+	name: string;
+	price: string;
+	isFeatured: boolean;
+	size: Size;
+	color: Color;
+	images: Image[];
+}
+
+export interface Size {
+	id: string;
+	name: string;
+	value: string;
+}
+
+export interface Color {
+	id: string;
+	name: string;
+	value: string;
+}
+
+export interface Image {
+	id: string;
+	url: string;
+}
+
+export interface QueryFilterProducts {
+	categoryId?: string;
+	colorId?: string;
+	sizeId?: string;
+	isFeatured?: boolean;
+}
+
+export interface ProductListProps {
+	title: string;
+	items: Product[];
+}
+
+export interface ProductCardProps {
+	data: Product;
+}
+
+export interface IconButtonProps {
+	onClick?: MouseEventHandler<HTMLButtonElement> | undefined;
+	icon: React.ReactElement;
+	className?: string;
+}
+
+export interface CurrencyProps {
+	value?: string | number;
 }
