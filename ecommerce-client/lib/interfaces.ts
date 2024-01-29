@@ -82,3 +82,15 @@ export interface ProductPageProps {
 		productId: string;
 	};
 }
+
+export interface GalleryProps {
+	images: Image[];
+}
+
+export interface GalleryTabProps {
+	image: Image;
+}
+
+export interface InfoProps {
+	data: Product;
+}
