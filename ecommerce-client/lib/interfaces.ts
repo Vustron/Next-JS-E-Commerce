@@ -76,3 +76,9 @@ export interface IconButtonProps {
 export interface CurrencyProps {
 	value?: string | number;
 }
+
+export interface ProductPageProps {
+	params: {
+		productId: string;
+	};
+}
