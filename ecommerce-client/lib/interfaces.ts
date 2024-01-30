@@ -110,3 +110,8 @@ export interface FilterProps {
 	name: string;
 	valueKey: string;
 }
+
+export interface MobileFiltersProps {
+	sizes: Size[];
+	colors: Color[];
+}

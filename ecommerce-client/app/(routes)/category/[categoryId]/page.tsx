@@ -1,3 +1,4 @@
+import MobileFilters from '@/components/filter/MobileFilters';
 import { getCategory } from '@/lib/actions/getCategory';
 import { getProducts } from '@/lib/actions/getProducts';
 import ProductCard from '@/components/ui/ProductCard';
@@ -38,6 +39,8 @@ const CategoryPage: React.FC<CategoryPageProps> = async ({
 
 				<div className='px-4 sm:px-4 lg:px-8 pb-24'>
 					<div className='lg:grid lg:grid-cols-5 lg:gap-x-8'>
+						<MobileFilters sizes={sizes} colors={colors} />
+
 						<div className='hidden lg:block'>
 							<Filter valueKey='sizeId' name='Sizes' data={sizes} />
 
