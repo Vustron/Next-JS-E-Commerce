@@ -94,3 +94,19 @@ export interface GalleryTabProps {
 export interface InfoProps {
 	data: Product;
 }
+
+export interface CategoryPageProps {
+	params: {
+		categoryId: string;
+	};
+	searchParams: {
+		colorId: string;
+		sizeId: string;
+	};
+}
+
+export interface FilterProps {
+	data: (Size | Color)[];
+	name: string;
+	valueKey: string;
+}
