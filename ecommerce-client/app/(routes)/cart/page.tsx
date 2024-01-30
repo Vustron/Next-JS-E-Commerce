@@ -2,6 +2,7 @@
 
 import CartItem from '@/components/cart/CartItem';
 import Container from '@/components/ui/Container';
+import Summary from '@/components/cart/Summary';
 import useMounted from '@/hooks/useMounted';
 import { useCart } from '@/hooks/useCart';
 
@@ -36,6 +37,8 @@ const CartPage = () => {
 								))}
 							</ul>
 						</div>
+
+						<Summary />
 					</div>
 				</div>
 			</Container>

@@ -13,6 +13,7 @@ const PreviewModal = () => {
 	if (!product) {
 		return null;
 	}
+
 	return (
 		<Modal isOpen={previewModal.isOpen} onClose={previewModal.onClose}>
 			<div className='grid w-full grid-cols-1 items-start gap-x-6 gap-y-8 sm:grid-cols-12 lg:gap-x-8'>
