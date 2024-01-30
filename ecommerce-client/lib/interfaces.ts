@@ -115,3 +115,27 @@ export interface MobileFiltersProps {
 	sizes: Size[];
 	colors: Color[];
 }
+
+export interface PreviewModalStore {
+	isOpen: boolean;
+	data?: Product;
+	onOpen: (data: Product) => void;
+	onClose: () => void;
+}
+
+export interface PreviewModalProps {
+	isOpen: boolean;
+	onClose: () => void;
+	children: React.ReactNode;
+}
+
+export interface CartStore {
+	items: Product[];
+	addItem: (data: Product) => void;
+	removeItem: (id: string) => void;
+	removeAll: () => void;
+}
+
+export interface CartItemProps {
+	data: Product;
+}
