@@ -2,11 +2,10 @@
 
 import Image from 'next/image';
 import { X } from 'lucide-react';
-import { toast } from 'react-hot-toast';
 import { useCart } from '@/hooks/useCart';
 import Currency from '@/components/ui/Currency';
+import { CartItemProps } from '@/lib/interfaces';
 import IconButton from '@/components/ui/IconButton';
-import { CartItemProps, Product } from '@/lib/interfaces';
 
 const CartItem: React.FC<CartItemProps> = ({ data }) => {
 	// init cart

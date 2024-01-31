@@ -22,10 +22,10 @@ export default function RootLayout({
 		<html lang='en'>
 			<body className={font.className}>
 				<ModalProvider />
-				<ToastProvider />
 				<Navbar />
 				{children}
 				<Footer />
+				<ToastProvider />
 			</body>
 		</html>
 	);
