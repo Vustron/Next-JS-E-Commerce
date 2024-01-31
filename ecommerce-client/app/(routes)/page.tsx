@@ -3,6 +3,7 @@ import ProductList from '@/components/shared/ProductList';
 import { getProducts } from '@/lib/actions/getProducts';
 import Billboard from '@/components/shared/Billboard';
 import Container from '@/components/ui/Container';
+import Loading from '@/components/shared/Loader';
 
 export const revalidate = 0;
 
@@ -16,6 +17,7 @@ const HomePage = async () => {
 	return (
 		<Container>
 			<div className='space-y-10 pb-10'>
+				{!billboard && <Loading />}
 				<Billboard data={billboard} />
 
 				<div className='flex flex-col gap-y-8 px-4 sm:px-6 lg:px-8'>
