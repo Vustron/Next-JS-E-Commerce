@@ -7,6 +7,7 @@ import { Separator } from '@/components/ui/separator';
 import { CreditCard, Package } from 'lucide-react';
 import Heading from '@/components/shared/Heading';
 import { formatter } from '@/lib/utils';
+import { getGraphRevenue } from '@/lib/actions/getGraphRevenue';
 
 interface DashboardProps {
 	params: { storeId: string };
@@ -21,6 +22,9 @@ const DashboardPage: React.FC<DashboardProps> = async ({ params }) => {
 
 	// fetch product stock
 	const stockCount = await getStockCount(params.storeId);
+
+	// fetch graph data
+	const graphRevenue = await getGraphRevenue(params.storeId);
 
 	return (
 		<div className='flex-col'>
@@ -80,7 +84,7 @@ const DashboardPage: React.FC<DashboardProps> = async ({ params }) => {
 					</CardHeader>
 
 					<CardContent className='pl-2'>
-						<Overview data={[]} />
+						<Overview data={graphRevenue} />
 					</CardContent>
 				</Card>
 			</div>

@@ -9,7 +9,7 @@ interface OverviewProps {
 const Overview: React.FC<OverviewProps> = ({ data }) => {
 	return (
 		<ResponsiveContainer width='100%' height={350}>
-			<BarChart>
+			<BarChart data={data}>
 				<XAxis
 					dataKey='name'
 					stroke='#888888'
